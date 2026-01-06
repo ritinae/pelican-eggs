@@ -113,10 +113,6 @@ scripts:
       	wget -O "$DOWNLOAD_DIR/$V_MODPACK.zip" "$DOWNLOAD_MIRROR/$MODPACK_URL"
       	unzip -o "$DOWNLOAD_DIR/$V_MODPACK.zip" -d "$PLUGIN_DIR/$V_MODPACK"
       
-      	if [ -d "$PLUGIN_DIR/$V_MODPACK/config" ]; then
-      		cp -rf "$PLUGIN_DIR/$V_MODPACK/config" "/mnt/server/BepInEx"
-      	fi
-      
       	#Extract dependencies from ModPack JSON manifest
       	MODPACK_DEPS=$(cat "$PLUGIN_DIR/$V_MODPACK/manifest.json" | jq -r '.dependencies[]')
       
@@ -133,7 +129,24 @@ scripts:
       		wget -O "$DOWNLOAD_DIR/$MOD.zip" "$DOWNLOAD_MIRROR/$MOD_URL"
       		rm -rf "${MOD_DIR:?}"
       		unzip -o "$DOWNLOAD_DIR/$MOD.zip" -d "$MOD_DIR"
+      
+      		# Install mod configs
+      		if [ -d "$MOD_DIR/config" ]; then
+      			cp -rf "$MOD_DIR/config" "/mnt/server/BepInEx"
+      		# HACK: funky casing on some mods
+      		elif [ -d "$PLUGIN_DIR/$V_MODPACK/Config" ]; then
+      			cp -rf -t "$PLUGIN_DIR/$V_MODPACK/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
+      		fi
       	done
+      
+      	# Install modpack configs last to make sure the modpack can override any
+      	# files extracted from other mods.
+      	if [ -d "$PLUGIN_DIR/$V_MODPACK/config" ]; then
+      		cp -rf "$PLUGIN_DIR/$V_MODPACK/config" "/mnt/server/BepInEx"
+      	# HACK: funky casing on some mods
+      	elif [ -d "$PLUGIN_DIR/$V_MODPACK/Config" ]; then
+      		cp -rf -t "$PLUGIN_DIR/$V_MODPACK/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
+      	fi
       fi
       
       echo "-------------------------------------------------------"
