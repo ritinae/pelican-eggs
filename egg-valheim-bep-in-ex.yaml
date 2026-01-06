@@ -2,7 +2,7 @@ _comment: "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL"
 meta:
   version: PLCN_v3
   update_url: https://raw.githubusercontent.com/ritinae/pelican-eggs/refs/heads/main/egg-valheim-bep-in-ex.yamlnull
-exported_at: "2026-01-06T10:26:00+02:00"
+exported_at: "2026-01-06T10:27:00+02:00"
 name: "Valheim BepInEx (Modified)"
 author: inari@jakojaannos.fi
 uuid: 88849bb4-9b6c-4494-bf4a-15bf2bb69ec5
@@ -135,7 +135,7 @@ scripts:
       			cp -rf "$MOD_DIR/config" "/mnt/server/BepInEx"
       		# HACK: funky casing on some mods
       		elif [ -d "$PLUGIN_DIR/$V_MODPACK/Config" ]; then
-      			cp -rf -t "$PLUGIN_DIR/$V_MODPACK/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
+      			cp -rf -t "/mnt/server/BepInEx/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
       		fi
       	done
       
@@ -145,7 +145,7 @@ scripts:
       		cp -rf "$PLUGIN_DIR/$V_MODPACK/config" "/mnt/server/BepInEx"
       	# HACK: funky casing on some mods
       	elif [ -d "$PLUGIN_DIR/$V_MODPACK/Config" ]; then
-      		cp -rf -t "$PLUGIN_DIR/$V_MODPACK/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
+      		cp -rf -t "/mnt/server/BepInEx/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
       	fi
       fi
       

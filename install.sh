@@ -103,7 +103,7 @@ if [ ! -z "$V_MODPACK" ]; then
 			cp -rf "$MOD_DIR/config" "/mnt/server/BepInEx"
 		# HACK: funky casing on some mods
 		elif [ -d "$PLUGIN_DIR/$V_MODPACK/Config" ]; then
-			cp -rf -t "$PLUGIN_DIR/$V_MODPACK/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
+			cp -rf -t "/mnt/server/BepInEx/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
 		fi
 	done
 
@@ -113,7 +113,7 @@ if [ ! -z "$V_MODPACK" ]; then
 		cp -rf "$PLUGIN_DIR/$V_MODPACK/config" "/mnt/server/BepInEx"
 	# HACK: funky casing on some mods
 	elif [ -d "$PLUGIN_DIR/$V_MODPACK/Config" ]; then
-		cp -rf -t "$PLUGIN_DIR/$V_MODPACK/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
+		cp -rf -t "/mnt/server/BepInEx/config" "$PLUGIN_DIR/$V_MODPACK/Config/*"
 	fi
 fi
 
